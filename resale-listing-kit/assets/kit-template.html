@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wardrobe clear-out</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* resale-listing-kit template v1.4. Do not restyle: fill the KIT data block only. */
+:root{color-scheme:light dark;
+--bg:light-dark(#fbfaf6,#141210);--ink:light-dark(#1c1916,#f2ede4);--mut:light-dark(#6f665d,#a69d92);
+--card:light-dark(#ffffff,#1d1a17);--line:light-dark(#e6dfd3,#34302b);--red:light-dark(#d23a22,#ff6a4f);
+--butter:light-dark(#f6e7a8,#4a4223);--paper:light-dark(#fffdf5,#221f1b);--ok:light-dark(#1f6b45,#7fd3a3)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Archivo,system-ui,sans-serif;overflow-x:clip}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px}
+h1,h2,h3{font-weight:900;line-height:1.05;margin:0;text-wrap:balance}
+h2{font-size:30px;margin:40px 0 6px}h3{font-size:20px}
+.mut{color:var(--mut)}
+.frame{min-height:100svh;display:flex;flex-direction:column;justify-content:center;gap:18px;padding:24px 0 28px}
+.kicker{font-size:15px;font-weight:600}
+.big{font-size:clamp(40px,12vw,58px);letter-spacing:-.02em}.big em{font-style:normal;color:var(--red)}
+.fan{position:relative;height:clamp(220px,58vw,300px);margin:6px 0}
+.fan img{position:absolute;top:0;width:34%;aspect-ratio:3/4;object-fit:cover;border-radius:8px;border:4px solid var(--card);box-shadow:0 10px 24px rgba(0,0,0,.18);background:var(--line)}
+.receipt{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:16px 16px 20px;font-family:"Space Mono",monospace;font-size:14px;
+  -webkit-mask:radial-gradient(circle 6px at 50% 100%,#0000 98%,#000) 0 0/14px 100%;mask:radial-gradient(circle 6px at bottom,#0000 98%,#000) 50% 0/14px 100% repeat-x}
+.receipt .row{display:flex;justify-content:space-between;gap:12px;padding:3px 0}.receipt .row b{white-space:nowrap}
+.receipt hr{border:0;border-top:1px dashed var(--line);margin:8px 0}.receipt .tot{font-weight:700;font-size:16px}
+.go{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.go div{border-radius:10px;padding:10px;background:var(--card);border:1px solid var(--line)}
+.go b{display:block;font-size:28px;font-weight:900;line-height:1}.go span{font-size:13px}
+.go .r b{color:var(--ok)}.go .c b{color:#b07d00}.go .p b{color:var(--red)}
+.note{background:var(--butter);border-radius:14px;padding:16px 18px;margin:8px 0 4px}
+.note b{font-size:18px;display:block;margin-bottom:4px}.note p{margin:0}
+.before{margin:14px 0 0;border:1.5px solid var(--ink);border-radius:14px;padding:14px 16px}.before ol{margin:8px 0 0;padding-left:20px}.before li{margin:5px 0}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:14px 0 4px;position:sticky;top:0;background:var(--bg);z-index:5}
+.chips button{flex:none;font:600 14px Archivo,sans-serif;border:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:99px;padding:0 14px;min-height:40px;cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;margin:16px 0;overflow:hidden;position:relative}
+.card.hero{border:2px solid var(--ink)}
+.pics{display:flex;gap:8px;overflow-x:auto;padding:12px;scroll-snap-type:x mandatory}
+.pic{flex:none;width:44%;position:relative;scroll-snap-align:start;margin:0}.card.hero .pic:first-child{width:70%}
+.pic img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px;display:block;background:var(--line)}
+.pic .n{position:absolute;top:6px;left:6px;background:var(--ink);color:var(--bg);font:700 12px "Space Mono",monospace;border-radius:99px;padding:2px 8px}
+.pic:first-child .n{background:var(--red);color:#fff}
+.pic.skip img{filter:grayscale(1);opacity:.4}.pic.skip .n{background:var(--mut)}
+.pic figcaption{font-size:13px;color:var(--mut);margin-top:4px;line-height:1.3}
+.body{padding:0 16px 16px}.body .sub{font-size:14px;color:var(--mut);margin:4px 0 0}
+.story{margin:12px 0 0;font-size:16px;border-left:3px solid var(--red);padding-left:10px}
+.status,.low,.thin{display:inline-block;font:700 12px "Space Mono",monospace;padding:3px 8px;border-radius:99px;margin-top:8px}
+.low{margin-left:6px;background:var(--butter)}
+.thin{margin-top:4px;background:color-mix(in srgb,#e0a400 22%,transparent);color:light-dark(#7a5600,#f3c650)}
+.st-r{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+.st-c{background:color-mix(in srgb,#e0a400 22%,transparent);color:light-dark(#7a5600,#f3c650)}
+.st-p{background:color-mix(in srgb,var(--red) 16%,transparent);color:var(--red)}
+.price{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:12px;margin-top:12px}.price span{flex:1 1 12em}.price b{font-size:34px;font-weight:900}
+.mkt{margin-top:10px;border:1px dashed var(--line);border-radius:10px;padding:10px 12px;font-size:14px}
+.mkt .row{display:grid;grid-template-columns:4.2em minmax(0,1fr);gap:8px;padding:6px 0;border-top:1px dashed var(--line)}.mkt .row:first-of-type{border-top:0}
+.mkt small{display:block;color:var(--mut);font-size:13px;margin-top:4px}
+.bar{position:relative;height:8px;background:var(--line);border-radius:99px;margin:6px 0 2px}
+.bar i{position:absolute;top:0;bottom:0;border-radius:99px;background:var(--ink);opacity:.35}
+.bar u{position:absolute;top:-4px;width:4px;height:16px;border-radius:2px;background:var(--red)}
+.how{font-size:13px;color:var(--mut);margin-top:4px}
+.where{margin:8px 0 0;font-size:14px}.where b{font-weight:800}
+.todo{margin-top:12px}.todo h4{margin:10px 0 2px;font-size:13px;font-weight:700}.todo h4.t-n{color:var(--red)}
+.todo label{display:flex;gap:10px;align-items:flex-start;font-size:15px;padding:5px 0;cursor:pointer}
+.todo input,.ticks input{width:22px;height:22px;flex:none;margin:0;accent-color:var(--ink)}
+.todo .clear{font-size:14px;color:var(--mut);margin:8px 0 0}
+details.fields{margin-top:12px;border-top:1px solid var(--line)}
+details.fields summary{cursor:pointer;font-weight:700;padding:12px 0;min-height:44px}
+.f{margin:0 0 10px}.f .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.f label{font-size:13px;font-weight:600;color:var(--mut)}
+.f textarea,.f input{width:100%;font:16px/1.45 Archivo,sans-serif;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;resize:vertical}
+.cp{font:600 13px Archivo,sans-serif;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:99px;padding:0 12px;min-height:32px;cursor:pointer}
+.cp.ok{background:var(--ink);color:var(--bg)}
+.ticks{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin-top:14px}
+.ticks label{display:flex;gap:8px;align-items:center;min-height:48px;border:1.5px solid var(--line);border-radius:12px;padding:8px 10px;font-weight:700;font-size:14px;cursor:pointer}
+.ticks label.on{border-color:var(--ink)}
+.stamp{position:absolute;z-index:4;top:140px;left:50%;translate:-50% 0;rotate:-14deg;font:900 44px Archivo,sans-serif;letter-spacing:.04em;color:var(--red);border:5px solid var(--red);border-radius:10px;padding:2px 14px;pointer-events:none;opacity:0;mix-blend-mode:multiply;background:color-mix(in srgb,var(--card) 35%,transparent)}
+:root[data-theme=dark] .stamp{mix-blend-mode:normal}
+.card.listed .stamp{opacity:.92}
+@media(prefers-reduced-motion:no-preference){.card.listed.fresh .stamp{animation:thunk .45s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes thunk{0%{opacity:0;scale:2.4;rotate:-4deg}70%{opacity:1;scale:.94}100%{opacity:.92;scale:1;rotate:-14deg}}}
+:focus-visible{outline:2.5px solid var(--red);outline-offset:2px}
+.empty{text-align:center;padding:30px 10px;color:var(--mut)}
+.play details{border-top:1px solid var(--line)}
+.play summary{cursor:pointer;font-weight:800;font-size:18px;padding:14px 0;min-height:44px}
+.play ul{margin:0 0 14px;padding-left:20px}.play li{margin:6px 0}
+.foot{font-size:13px;color:var(--mut);margin:28px 0 20px}
+.pubbtn{font:600 14px Archivo,sans-serif;border:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:99px;padding:0 16px;min-height:44px;cursor:pointer;margin-bottom:60px}
+.pub .floor,.pub .rfloor{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section class="frame" aria-label="Summary">
+<div class="kicker" id="kicker"></div>
+<h1 class="big" id="big"></h1>
+<p class="mut" id="demo" hidden></p>
+<div class="fan" id="fan"></div>
+<div class="receipt">
+<div class="row"><span>Items photographed</span><b id="rItems"></b></div>
+<div class="row"><span>Photos sorted, best first</span><b id="rPhotos"></b></div>
+<div class="row"><span>Listings drafted</span><b id="rDrafts"></b></div>
+<div class="row"><span>Reviewed against the item</span><b id="rRev"></b></div>
+<div class="row"><span id="rChkL"></span><b id="rChk"></b></div>
+<hr>
+<div class="row"><span>Asking, all in</span><b id="rAsk"></b></div>
+<div class="row rfloor"><span>Lowest I'd take</span><b id="rFloor"></b></div>
+<hr>
+<div class="row tot"><span>Listed so far</span><b id="rListed"></b></div>
+</div>
+<div class="go">
+<div class="r"><b id="gR"></b><span>can go up now</span></div>
+<div class="c"><b id="gC"></b><span>after a quick label or tape-measure check</span></div>
+<div class="p"><b id="gP"></b><span>need a photo first</span></div>
+</div>
+</section>
+
+<div class="note" role="note"><b>Read me first (yes, you)</b>
+<p>These listings are drafts, not gospel. Before you post each one, check every detail against the item in your hands: brand, size, colour, condition and any flaws. Fill in the measurements, take out anything that isn't right, and add something only you know, like how it fits or why it's going. Write it the way you'd tell a friend. You know this item; this is just a head start.</p></div>
+<div class="before"><h3>Do these before you open the app</h3><ol id="before"></ol></div>
+
+<div id="heroWrap"><h2>The headliners</h2><p class="mut">The best photos and the best backstories.</p><div id="heroes"></div></div>
+
+<h2 id="restH">The supporting cast</h2>
+<div class="chips" role="group" aria-label="Filter items">
+<button aria-pressed="true" data-f="all">All</button><button aria-pressed="false" data-f="r">Ready now</button><button aria-pressed="false" data-f="c">Quick check</button><button aria-pressed="false" data-f="p">Needs a photo</button><button aria-pressed="false" data-f="todo">Not listed yet</button>
+</div>
+<div id="rest"></div>
+
+<section class="play"><h2>How to actually sell it</h2><p class="mut">The playbook, minus the fluff. Check each point against the marketplace's current rules.</p><div id="play"></div></section>
+<p class="foot" id="foot"></p>
+<button class="pubbtn" id="pubBtn" type="button">Show public copy (hides floors)</button>
+</div>
+<script>
+{
+/* KIT DATA: replace everything between the two markers. Nothing else in this file changes. */
+const KIT=/*KIT*/{
+ key:"sample",kicker:"a wardrobe clear-out, itemised",tagline:"One very full wardrobe.",demo:"",
+ markets:["Vinted","Depop"],region:"Australia",checked:"25 Nov 2026",recheck:"9 Dec 2026",
+ before:["Measure the jeans flat: waist, rise, inseam."],
+ play:[{h:"Get found",open:1,li:["Title formula: brand, item, two style words, colour, size."]}],
+ items:[{id:"s1",name:"Sample wide leg jeans",sub:"Sample Label · AU 8",story:"",low:0,
+  photos:[["img/s1a.jpg","Cover · worn front"],["img/s1b.jpg","Label, size 8"]],
+  todo:[["n","Measure waist, rise and inseam flat","check"]],
+  f:{title:"Sample Label wide leg jeans light blue size 8",desc:"...",cat:"Women › Clothing › Jeans",brand:"Sample Label",size:"8",cond:"Very good",colour:"Light blue",material:"Check care label",parcel:"Small"},
+  price:35,floor:25,
+  res:{Vinted:{n:14,lo:18,med:32,hi:55,q:"sample label wide leg jean",step:"Style name",filters:"Women, size 8",closest:"Sample Label wide leg, sz 8, $35"},
+       Depop:{n:6,lo:25,med:40,hi:65,q:"sample label wide leg jean",step:"Style name",filters:"Size 8",closest:"Sample Label jeans 8, $42"}},
+  where:"Depop and Vinted. Depop asks more for this ($40 vs $32)."}]
+}/*END*/;
+
+const items=KIT.items,M=KIT.markets;
+const TIER={n:"Necessary: don't post without it",s:"Strongly recommended",h:"Nice to have"};
+const store={get(k){try{return localStorage.getItem('rlk:'+KIT.key+':'+k)}catch(e){return null}},set(k,v){try{localStorage.setItem('rlk:'+KIT.key+':'+k,v)}catch(e){}}};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const $=id=>document.getElementById(id);
+const LABELS={title:"Title",desc:"Description",cat:"Category",brand:"Brand",size:"Size",cond:"Condition",colour:"Colour",material:"Material",parcel:"Parcel size"};
+const done=(id,j)=>store.get(id+':t'+j)==='1';
+const group=it=>{const open=it.todo.map((t,j)=>[t,j]).filter(([t,j])=>t[0]==='n'&&!done(it.id,j));if(open.some(([t])=>t[2]==='photo'))return'p';return open.length?'c':'r'};
+const val=(it,k)=>store.get(it.id+':'+k)??it.f[k];
+const mkt=(lbl,a,price)=>{if(!a||!a.n)return`<div class="row"><span>${esc(lbl)}</span><span>no close matches${a&&a.q?`<div class="how">Searched "${esc(a.q)}"</div>`:''}</span></div>`;
+ const max=Math.max(a.hi,price)*1.15,pc=x=>Math.min(100,x/max*100);
+ return`<div class="row"><span>${esc(lbl)}</span><span>median <b>$${a.med}</b> · range $${a.lo}-${a.hi} · ${a.n} listings${a.n<10?`<br><span class="thin">thin sample: based on ${a.n}</span>`:''}
+ <div class="bar"><i style="left:${pc(a.lo)}%;width:${Math.max(2,pc(a.hi)-pc(a.lo))}%"></i><u style="left:calc(${pc(price)}% - 2px)"></u></div>
+ <div class="how">Searched "${esc(a.q)}" (${esc(a.step)}) · ${esc(a.filters)}<br>Closest: ${esc(a.closest)}</div></span></div>`};
+const field=(it,k)=>{const id=`${it.id}-${k}`,v=val(it,k),big=k==='desc'||k==='title';return`<div class="f"><div class="top"><label for="${id}">${LABELS[k]}</label><button class="cp" data-c="${id}">Copy</button></div>${big?`<textarea id="${id}" data-i="${it.id}" data-k="${k}" rows="${k==='desc'?9:2}">${esc(v)}</textarea>`:`<input id="${id}" data-i="${it.id}" data-k="${k}" value="${esc(v)}">`}</div>`};
+const todo=it=>{if(!it.todo.length)return`<div class="todo"><p class="clear">Photos: all present and correct. Nothing to reshoot.</p></div>`;return`<div class="todo">${['n','s','h'].map(t=>{const rows=it.todo.map((x,j)=>[x,j]).filter(([x])=>x[0]===t);return rows.length?`<h4 class="t-${t}">${TIER[t]}</h4>`+rows.map(([x,j])=>`<label><input type="checkbox" data-t="${it.id}:${j}" ${done(it.id,j)?'checked':''}><span>${esc(x[1])}</span></label>`).join(''):''}).join('')}</div>`};
+const STATUS={r:['st-r','ready to post'],c:['st-c','quick check first'],p:['st-p','needs a photo first']};
+const card=it=>{const g=group(it),rev=store.get(it.id+':rev')==='1',lis=store.get(it.id+':lis')==='1';let n=0;return`<article class="card${it.story?' hero':''}${lis?' listed':''}" id="${it.id}" data-g="${g}">
+<div class="stamp" aria-hidden="true">LISTED</div>
+<div class="pics">${it.photos.map((p,j)=>{const sk=!!p[2];if(!sk)n++;return`<figure class="pic${sk?' skip':''}"><img src="${esc(p[0])}" alt="${esc(it.name)}: ${esc(p[1])}" loading="${it.story&&j<2?'eager':'lazy'}"><span class="n">${sk?'skipped':n===1?'cover':n}</span><figcaption>${esc(p[1].replace(/^Cover · /,'').replace(/^Skip: /,'Skipped: '))}</figcaption></figure>`}).join('')}</div>
+<div class="body"><h3>${esc(it.name)}</h3><p class="sub">${esc(it.sub)}</p><span class="status ${STATUS[g][0]}">${STATUS[g][1]}</span>${it.low?'<span class="low">bundle me</span>':''}
+${it.story?`<p class="story">${esc(it.story)}</p>`:''}
+<div class="price"><b>$${it.price}</b><span class="mut floor">asking · floor $${it.floor} (keep that one to yourself)</span></div>
+<div class="mkt"><b>What the market's asking</b>${M.map(m=>mkt(m,it.res[m],it.price)).join('')}<small>Asking prices, not sales. Checked ${esc(KIT.checked)}, re-check after ${esc(KIT.recheck)}.</small><p class="where"><b>Where to list:</b> ${esc(it.where)}</p></div>
+${todo(it)}
+<details class="fields"><summary>The listing, ready to paste</summary>${Object.keys(LABELS).map(k=>field(it,k)).join('')}</details>
+<div class="ticks"><label class="${rev?'on':''}"><input type="checkbox" data-rev="${it.id}" ${rev?'checked':''}>Reviewed against the item</label><label class="${lis?'on':''}"><input type="checkbox" data-lis="${it.id}" ${lis?'checked':''}>Listed</label></div>
+</div></article>`};
+let filter='all';
+const render=()=>{const heroes=items.filter(i=>i.story);$('heroWrap').hidden=!heroes.length;$('restH').textContent=heroes.length?'The supporting cast':'The items';
+$('heroes').innerHTML=heroes.map(card).join('');
+const rest=items.filter(i=>!i.story).filter(i=>filter==='all'||(filter==='todo'?store.get(i.id+':lis')!=='1':group(i)===filter));
+$('rest').innerHTML=rest.length?rest.map(card).join(''):`<p class="empty">${filter==='todo'?'Nothing left to list. Wardrobe: emptied. Postie: about to be busy.':'Nothing in this pile. Enjoy that.'}</p>`;sum()};
+const sum=()=>{let a=0,f=0,l=0,rv=0;const c={r:0,c:0,p:0};items.forEach(i=>{a+=i.price;f+=i.floor;c[group(i)]++;if(store.get(i.id+':lis')==='1')l++;if(store.get(i.id+':rev')==='1')rv++});
+const N=items.length;$('rItems').textContent=N;$('rDrafts').textContent=N;$('rRev').textContent=`${rv} of ${N}`;$('rListed').textContent=`${l} of ${N}`;
+$('rPhotos').textContent=items.reduce((s,i)=>s+i.photos.filter(p=>!p[2]).length,0);$('rAsk').textContent='$'+a;$('rFloor').textContent='$'+f;
+$('rChkL').textContent=`Prices checked (${M.join(' + ')})`;$('rChk').textContent=N;$('gR').textContent=c.r;$('gC').textContent=c.c;$('gP').textContent=c.p;
+$('big').innerHTML=`${N} items.<br>$${a} asking.<br><em>${esc(KIT.tagline)}</em>`};
+$('kicker').textContent=KIT.kicker;if(KIT.demo){$('demo').hidden=false;$('demo').textContent=KIT.demo}
+$('before').innerHTML=KIT.before.map(b=>`<li>${esc(b)}</li>`).join('');
+$('play').innerHTML=KIT.play.map(s=>`<details${s.open?' open':''}><summary>${esc(s.h)}</summary><ul>${s.li.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></details>`).join('');
+$('foot').textContent=`Prices are asking prices on current listings, not sales, from the first page of search results on ${M.map(m=>m+' '+KIT.region).join(' and ')}, checked ${KIT.checked}. Re-check anything not listed by ${KIT.recheck}. Bars show the range of asking prices; the red mark is your price. Ticks and edits save in this browser only, so use one device.`;
+const fanItems=(items.filter(i=>i.story).length?items.filter(i=>i.story):items).slice(0,6);
+$('fan').innerHTML=fanItems.map((i,k)=>`<img src="${esc(i.photos[0][0])}" alt="" style="left:${k*(66/Math.max(1,fanItems.length-1))}%;rotate:${[-8,-4,0,3,6,9][k]}deg;top:${[14,4,0,6,12,20][k]}px;z-index:${[1,3,5,6,4,2][k]}">`).join('');
+document.addEventListener('change',e=>{const t=e.target;
+if(t.dataset.t){const[a,b]=t.dataset.t.split(':');store.set(a+':t'+b,t.checked?'1':'0');const c=$(a),g=group(items.find(i=>i.id===a));c.dataset.g=g;const s=c.querySelector('.status');s.className='status '+STATUS[g][0];s.textContent=STATUS[g][1];sum()}
+if(t.dataset.rev){store.set(t.dataset.rev+':rev',t.checked?'1':'0');t.parentElement.classList.toggle('on',t.checked);sum()}
+if(t.dataset.lis){const id=t.dataset.lis;store.set(id+':lis',t.checked?'1':'0');const c=$(id);c.classList.toggle('listed',t.checked);c.classList.toggle('fresh',t.checked);t.parentElement.classList.toggle('on',t.checked);sum()}});
+document.addEventListener('input',e=>{const t=e.target;if(t.dataset.k)store.set(t.dataset.i+':'+t.dataset.k,t.value)});
+document.addEventListener('click',async e=>{const f=e.target.closest('.chips button');if(f){filter=f.dataset.f;document.querySelectorAll('.chips button').forEach(b=>b.setAttribute('aria-pressed',b===f));render();return}
+if(e.target.id==='pubBtn'){const on=document.body.classList.toggle('pub');e.target.textContent=on?'Show working copy':'Show public copy (hides floors)';return}
+const b=e.target.closest('.cp');if(!b)return;const el=$(b.dataset.c);let ok=false;try{await navigator.clipboard.writeText(el.value);ok=true}catch(x){el.focus();el.select()}b.textContent=ok?'Copied':'Selected, copy away';b.classList.toggle('ok',ok);setTimeout(()=>{b.textContent='Copy';b.classList.remove('ok')},1500)});
+render();
+}
+</script>
+</body>
+</html>
